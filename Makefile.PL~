@@ -1,5 +1,5 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(
 	      NAME => 'Net::EMI',
-	      VERSION => '0.9.1.1',
+	      VERSION => '0.9',
 );

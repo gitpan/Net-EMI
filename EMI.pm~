@@ -8,7 +8,7 @@
 package Net::EMI;
 use IO::Socket;
 
-$VERSION = "0.9.1.1";
+$VERSION = "0.9.1";
 
 my $stx = chr(2); # start transmission
 my $etx = chr(3); # end transmission
