@@ -13,6 +13,7 @@ HISTORY
 0.9	first try
 0.9.1	contains bug fixes from Gustav Schaffter
 0.9.1.1 updated specification link in README
+0.9.1.2 included simple test script for "make test"
 
 INSTALLATION
 
