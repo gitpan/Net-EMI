@@ -1,6 +1,6 @@
 # Net::EMI.pm
 #
-# Copyright (c) 2001 Jochen Schneider <jochen.schneider@mediaways.net>.
+# Copyright (c) 2001,2002 Jochen Schneider <jochen.schneider@mediaways.net>.
 # All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
@@ -8,7 +8,7 @@
 package Net::EMI;
 use IO::Socket;
 
-$VERSION = "0.9";
+$VERSION = "0.9.1";
 
 my $stx = chr(2); # start transmission
 my $etx = chr(3); # end transmission
@@ -58,8 +58,6 @@ sub login # login to SMSC
 {
 	my $password = pop @_;
 	my $OadC = pop @_;
-	my $checksum = '';
-	#my $OadC = "30109";
 	
 	my $OTON = "6"; #short number alias
 	my $ONPI = "5"; #private
@@ -76,7 +74,6 @@ sub login # login to SMSC
 	my $checksum = checksum($header.$slash.$data.$slash);
 	
 	my $message_string = $header.$slash.$data.$slash.$checksum;
-	#print $message_string."\n";
 	return message($message_string);
 }
 sub send_sms # send the SMS
@@ -88,7 +85,7 @@ sub send_sms # send the SMS
 	my $OAdC = "10ED32391DBE87F373";# Adress Code originator
 	my $LRAd = "";                  # Last Resort Address
 	my $MT   = "3";                 # message type (alphanumeric)
-	my $message   = ia5_encode($message);
+	$message   = ia5_encode($message);
 	my $OTOA = "5039";              # Originator Type of Address
 	my $NRq  = "";                  # Notfication Request 1
 	my $NT   = "";                  # Notification Type 3
@@ -99,7 +96,6 @@ sub send_sms # send the SMS
 	my $OT = '51'; # submit message
 	my $LEN = data_len($data);
 	my $header = $TRN.$slash.$LEN.$slash.$type.$slash.$OT;
-	my $checksum = 0;
 	my $checksum = checksum($header.$slash.$data.$slash);
 	my $message_string = $header.$slash.$data.$slash.$checksum;
 	print $message_string."\n";
@@ -156,7 +152,7 @@ use Net::EMI;
 
 $emi = Net::EMI->new("smsc.yourdomain.com",3024) || die "can't connect\n";
 $emi->login("password") || die "login failed\n";
-$emi->send_sms($recipient,$text) || die "sending sms failed\n";s
+$emi->send_sms($recipient,$text) || die "sending sms failed\n";
 
 =head1 CONSTRUCTOR
 
@@ -210,7 +206,7 @@ Jochen Schneider <jochen.schneider@mediaways.net>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001 Jochen Schneider. All rights reserved.
+Copyright (c) 2001,2002 Jochen Schneider. All rights reserved.
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
