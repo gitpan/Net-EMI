@@ -7,6 +7,7 @@ It can be used to compose, send, receive, deliver... short messages to GSM Netwo
 EMI-enabled SMSC's (Short Message Service Center).
 Usually the Network connection is based on TCP/IP or X.25.
 The EMI/UCP specification can be found here http://cpa.telenor.no/docs/SMSC_EMI_specification_3.5.pdf
+Mail questions, patches or suggestions to net-emi@gt.owl.de .
 
 HISTORY
 
@@ -14,6 +15,7 @@ HISTORY
 0.9.1	contains bug fixes from Gustav Schaffter
 0.9.1.1 updated specification link in README
 0.9.1.2 included simple test script for "make test"
+0.9.2	main code cleanup by Gustav Schaffter
 
 INSTALLATION
 
@@ -22,6 +24,8 @@ make install
 
 COPYRIGHT
  
-© 2001,2002 Jochen Schneider <jochen.schneider@mediaways.net> All rights reserved.
+© 2001,2002 Jochen Schneider <jochen.schneider@mediaways.net>.
+© 2002 Gustav Schaffter.
+All rights reserved.
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
