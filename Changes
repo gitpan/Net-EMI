@@ -1,0 +1,15 @@
+Revision history for Perl extension Net::EMI.
+
+
+0.9	   first try
+
+0.9.1	   contains bug fixes from Gustav Schaffter
+
+0.9.1.1  updated specification link in README
+
+0.9.1.2  included simple test script for "make test"
+
+1.0      First 'non-beta' release.
+         Warning! Method interfaces changed.
+         This version is not backwards compatible with the BETA versions 0.9.x. 
+

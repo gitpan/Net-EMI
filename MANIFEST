@@ -1,5 +1,7 @@
+Changes
 EMI.pm
 Makefile.PL
-Manifest
+MANIFEST
 README
-t/use.t
+test.pl
+
