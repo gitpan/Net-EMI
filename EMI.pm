@@ -8,7 +8,7 @@ use strict;
 # modify it under the same terms as Perl itself.
 
 use vars qw($VERSION);
-$VERSION='0.9.2';
+$VERSION='0.9.2.1';
 
 use IO::Socket;
 
@@ -260,3 +260,106 @@ sub _data_len {
 ###########################################################################################################
 sub _ia5_encode {
 	join('',map {sprintf "%X",ord} split(//,pop(@_)));
+}
+
+#############################
+__END__
+
+=head1 NAME
+
+Net::EMI - EMI/UCP GSM SMSC Protocol Class (BETA!!!!)
+
+=head1 SYNOPSIS
+
+use Net::EMI
+
+$emi = Net::EMI->new('smsc.youdomain.com',$smsc_port);
+
+=head1 DESCRIPTION
+
+This module implements a client Interface to the EMI (External Machine
+Interface) specification,
+which itself is based on the ERMES UCP (UNIVERSAL Computer Protocol) with
+some SMSC-specific
+extensions.
+It can be used to compose, send, receive, deliver... short messages to GSM
+Networks via
+EMI-enabled SMSC's (Short Message Service Center).
+Usually the Network connection is based on TCP/IP or X.25.
+The EMI/UCP specification can be found here
+http://www.cmgtele.com/docs/SMSC_EMI_specification_3.5.pdf .
+
+A new Net::EMI object must be created with the I<new> method. Once
+this has been done, all commands are accessed via method calls
+on the object.
+
+=head1 EXAMPLES
+
+use Net::EMI;
+($recipient,$text)=@ARGV;
+
+$emi = Net::EMI->new("smsc.yourdomain.com",3024) || die "can't connect\n";
+$emi->login("password") || die "login failed\n";
+$emi->send_sms($recipient,$text) || die "sending sms failed\n";
+
+=head1 CONSTRUCTOR
+
+=over 4
+
+=item new ( <host>, <port>)
+
+This is the constructor for a new Net::EMI object.
+C<host> is the hostname or ip-address of the SMCS and C<port> the TCP/IP
+port number.
+Returns undef if on connection failure.
+
+=back
+
+=head1 METHODS
+
+unless otherwise stated all methods return either a I<true> on success or I<undef>
+in case something went wrong.
+
+=over 4
+
+=item login ( SMSC_ID, PASSWORD )
+
+Authenticates against the SMSC with the given SMSC-id and password.
+Operation 60 of EMI Protocol.
+
+=item send_sms ( RECIPIENT, MESSAGE_TEXT )
+
+Submits the SMS to the SMSC (Operation 51) waits for SMSC response.
+I<RECIPIENT> is the phone number of the recipient in international with
+leading + or 00.
+Return of the method means, the message was submitted to the network. This
+does not mean
+the immidiate or guaranteed delivery.
+
+=item ia5_encode ( STRING )
+
+Returns the string in IA5 encoded format.
+ia5_encode is an internal method of Net::EMI and usually not necessary for
+SMS composition.
+
+=head1 SEE ALSO
+
+L<IO::Socket>
+
+L<IO::Socket::INET>
+
+=head1 AUTHOR
+
+ Jochen Schneider <jochen.schneider@mediaways.net> .
+ Mail questions, patches or suggestions to net-emi@gt.owl.de .
+
+=head1 COPYRIGHT
+
+Copyright (c) 2001,2002 Jochen Schneider.
+Copyright (c) 2002 Gustav Schaffter. 
+All rights reserved.
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+

@@ -2,3 +2,4 @@ EMI.pm
 Makefile.PL
 Manifest
 README
+t/use.t

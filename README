@@ -16,6 +16,7 @@ HISTORY
 0.9.1.1 updated specification link in README
 0.9.1.2 included simple test script for "make test"
 0.9.2	main code cleanup by Gustav Schaffter
+0.9.2.1 fixed release bugs from 0.9.2
 
 INSTALLATION
 
